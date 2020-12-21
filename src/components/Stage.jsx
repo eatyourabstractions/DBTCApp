@@ -1,15 +1,19 @@
-import React from 'react'
-import Goal from './Goal'
+import React,{useContext} from 'react'
+import Goal from './Goal.tsx'
 import ChainsAdmin from './ChainsAdmin'
+
+import {StateProvider} from './GlobalContext'
 
 import styled from 'styled-components'
 
 function Stage() {
   
     return (
-            <Wrapper>
-               <ChainsAdmin/>
-            </Wrapper>
+            <StateProvider>
+                <Wrapper>
+                   <Goal/>
+                </Wrapper>
+            </StateProvider>
     )
 }
 
