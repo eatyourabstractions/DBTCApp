@@ -7,6 +7,7 @@ import {GlobalContext} from './GlobalContext'
 import {useMorph} from 'react-morph';
 import ChainsAdmin from './ChainsAdmin'
 
+
 type TileClass = {
     activeStartDate: Date,
     date: Date,
@@ -24,6 +25,8 @@ const Goal:React.FC = () => {
     const [clickedDays, setClickedDays] = useState<string[]>([])
     const [current, setCurrent] = useState<number>(0)
     const morph = useMorph();
+
+  
     const addDate = (value:Date) =>{
         const myDate = String(value)
        
@@ -67,6 +70,7 @@ const Goal:React.FC = () => {
         }
         return 'tileSize'
     }
+    
 
     const habitList = rows?.map((habit) =>
         <Habit key={habit.id} onClick={() => setCurrentHabit(habit.id)} color={habit.color}>

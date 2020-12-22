@@ -1,16 +1,18 @@
-import React, { useState, useContext, useCallback } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid';
 import {GlobalContext} from './GlobalContext'
-import _ from 'lodash';
+
 
 type Row = {
     id: number, color: string,  clickedDays: string[], name:string
 }
 
-const MyTable:React.FC =() => {
+
+const MyTable:React.FC = () => {
     const colors = ['salmon','fuchsia', 'lightblue', 'green','tomato', 'purple','blue'];
     const {rows, setRows} = useContext(GlobalContext)
+    
 
 
     
@@ -54,24 +56,21 @@ const MyTable:React.FC =() => {
         const newItem = {...tempItem, name:content}
         nextArr.splice(idx, 1, newItem)
         setRows(nextArr)
+        // handleInputOnChange(rowData.id, ev)
+        //value={`${rowData.name}`}
         }
     }   
 
-   
-    
-   
-    
-    
     const rowList = rows?.map((rowData) => {
      
         return (
-            <tr key={uuidv4()}>
+            <tr key={rowData.id}>
                 <td >
                     <Input 
                         type="text" 
                         color={ `${rowData.color}`}
-                        value={`${rowData.name}`}
-                        onChange={(ev) => debounceFunc(rowData.id, ev)}/>
+                        value={rowData.name}
+                        onChange={(ev) => handleInputOnChange(rowData.id, ev.target.value)}/>
                 </td>
                 <td>{genColors(rowData.id)}</td>
                 <td><button onClick={() => deleteRow(rowData.id)}>X</button></td>

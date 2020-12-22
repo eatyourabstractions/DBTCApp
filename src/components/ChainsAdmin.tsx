@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import MyTable from './MyTable.tsx'
+import MyTable from './MyTable'
+
+
 function ChainsAdmin() {
     return (
         <Wrapper>
             <h1>Manage my chains</h1>
-            <MyTable/>
+            <MyTable />
         </Wrapper>
     )
 }
