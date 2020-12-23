@@ -32,8 +32,8 @@
     height: 100px;
 }
 
-.totalSize  {
+.sizeAndBorder  {
     width: 700px;
-
+    border: none;
 }
 

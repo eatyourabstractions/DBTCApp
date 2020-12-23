@@ -2,7 +2,7 @@ import React,{useState, useContext} from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components'
-import './clicked.css'
+import './app.css'
 import {GlobalContext} from './GlobalContext'
 import {useMorph} from 'react-morph';
 import ChainsAdmin from './ChainsAdmin'
@@ -19,7 +19,7 @@ type Row = {
 }
 
 
-const Goal:React.FC = () => {
+const Main:React.FC = () => {
     const {rows, setRows} = useContext(GlobalContext)
     const [toggle, setToggle] = useState<boolean>(true);
     const [clickedDays, setClickedDays] = useState<string[]>([])
@@ -73,19 +73,23 @@ const Goal:React.FC = () => {
     
 
     const habitList = rows?.map((habit) =>
-        <Habit key={habit.id} onClick={() => setCurrentHabit(habit.id)} color={habit.color}>
+        <Habit key={habit.id} 
+               onClick={() => setCurrentHabit(habit.id)} 
+               color={habit.color}
+               isSelected={habit.id === current}
+               >
             {habit.name}
         </Habit>
         );
     return (
         <div>
-             <button onClick={() => setToggle(!toggle)}>Let's morph!</button>
+             <button onClick={() => setToggle(!toggle)}>{toggle ? 'Mange Habits' : 'Start marking'}</button>
                 <br />
                 {toggle ? (
                         <Wrapper {...morph} >
                             <Tomato>{habitList}</Tomato>
                             <Calendar 
-                                className={'totalSize'}
+                                className={'sizeAndBorder'}
                                 tileClassName={applyClass}
                                 onClickDay={addGlobalDate} 
                             />
@@ -99,19 +103,35 @@ const Goal:React.FC = () => {
     )
 }
 
-export default Goal
+export default Main
 
 const Wrapper = styled.div`
     display:flex;
 `;
 
 const Tomato = styled.div`
-    background-color:tomato;
-    width: 100px;
+    width: 200px;
     margin-right: 50px;
+   
+    margin-top: 25px;
 `;
 
+interface isSelected{
+    isSelected: boolean
+}
+const shadow = 'box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);'
 const Habit = styled.div`
     background-color:${props => props.color};
-    margin-bottom:5px;
+    padding:10px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    border-radius: 7px;
+    position: ${(props:isSelected) => props.isSelected ? 'relative': ''};
+    top: ${(props:isSelected) => props.isSelected ? '-5px': ''};
+    box-shadow: ${(props:isSelected) => props.isSelected ? shadow: ''};
+    &:hover{
+        box-shadow: ${shadow};
+        position: relative;
+        top: -5px;
+        }
 `;

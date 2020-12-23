@@ -1,5 +1,5 @@
 import React,{useContext} from 'react'
-import Goal from './Goal.tsx'
+import Main from './Main.tsx'
 import ChainsAdmin from './ChainsAdmin'
 
 import {StateProvider} from './GlobalContext'
@@ -11,7 +11,7 @@ function Stage() {
     return (
             <StateProvider>
                 <Wrapper>
-                   <Goal/>
+                   <Main/>
                 </Wrapper>
             </StateProvider>
     )
