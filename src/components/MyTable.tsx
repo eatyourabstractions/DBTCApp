@@ -27,7 +27,7 @@ const MyTable:React.FC = () => {
     }
     const addRow = () =>{
        if(rows && setRows) {
-        const newRow = {id: rows.length, color: 'salmon', clickedDays:[], name:'empty'}
+        const newRow = {id: rows.length, color: 'salmon', clickedDays:[], name:''}
         const nextArr:Row[] = [...rows];
         nextArr.push(newRow)
         setRows(nextArr)}
@@ -70,10 +70,13 @@ const MyTable:React.FC = () => {
                         type="text" 
                         color={ `${rowData.color}`}
                         value={rowData.name}
+                        placeholder={'please enter goal'}
                         onChange={(ev) => handleInputOnChange(rowData.id, ev.target.value)}/>
                 </td>
                 <td>{genColors(rowData.id)}</td>
-                <td><button onClick={() => deleteRow(rowData.id)}>X</button></td>
+                <td><button 
+                    style={{height:'40px', width:'40px', marginLeft:'5px', border:'none'}}
+                    onClick={() => deleteRow(rowData.id)}>X</button></td>
             </tr>
             
         )
@@ -115,19 +118,42 @@ const Wrapper = styled.div`
     align-items:center;
 `;
 
+const shadow = 'box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);'
+
+
 const AddBtn = styled.button`
+    margin-bottom: 40px;
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    border: none;
+    &:hover{
+        box-shadow: ${shadow}
+    }
 
 `;
 
 const Input = styled.input`
-    background-color: ${props => props.color}
+    background-color: ${props => props.color};
+    height: 40px;
+    width: 200px;
+    border: none;
+    border-radius: 3px;
+    font-size: 25px;
 `;
+
+
 
 const Color = styled.button<{color:string}>`
     background-color: ${props => props.color};
-    width:15px;
-    height:15px;
+    width:40px;
+    height:40px;
     border:none;
     margin-right: 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    &:hover{
+        box-shadow: ${shadow}
+    }
 `;
 
